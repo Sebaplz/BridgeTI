@@ -1,5 +1,5 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {ButtonDirective} from 'primeng/button';
+import {Button, ButtonDirective} from 'primeng/button';
 import {DividerModule} from 'primeng/divider';
 import {FloatLabelModule} from 'primeng/floatlabel';
 import {InputTextModule} from 'primeng/inputtext';
@@ -12,7 +12,6 @@ import {authAction} from '../../../../global/actions/auth.action';
 import {RouterLink} from '@angular/router';
 import {AuthStore} from '../../../../resources/stores/auth.store';
 import {authReaction} from '../../../../library/reactions/auth.reaction';
-import {LoginIn} from '../../../../resources/io/auth/login.in';
 import {PasswordModule} from 'primeng/password';
 import {passwordValidator} from '../../core/utils/passwordValidator';
 
@@ -30,7 +29,8 @@ import {passwordValidator} from '../../core/utils/passwordValidator';
     NgIf,
     RouterLink,
     PasswordModule,
-    FormsModule
+    FormsModule,
+    Button
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
@@ -43,6 +43,7 @@ export class LoginPageComponent implements OnInit, OnDestroy{
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, passwordValidator(), Validators.maxLength(20)]],
+    rememberMe: [false]
   });
 
   ngOnInit(): void {
@@ -58,8 +59,10 @@ export class LoginPageComponent implements OnInit, OnDestroy{
   }
 
   onSubmit(): void {
-    const {email, password} = this.loginForm.value as LoginIn;
-    this.authStore.dispatch(authReaction.login({email, password}));
+    const {email, password, rememberMe} = this.loginForm.value;
+    /*TODO: Validar el ts*/
+    // @ts-ignore
+    this.authStore.dispatch(authReaction.login({email, password, rememberMe}));
   }
 
 }

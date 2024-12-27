@@ -6,9 +6,11 @@
         <h1 class="text-900 text-3xl font-medium mt-0">BridgeTI</h1>
       </div>
       <div class="flex gap-2 flex-column">
-        <span class="text-600 font-medium line-height-3">¿No tienes cuenta de estudiante?</span>
-        <a routerLink="/auth/register/student" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Crea
-          una cuenta ahora!</a>
+        <span class="text-600 font-medium line-height-3">¿No tienes cuenta? Crea una cuenta ahora!</span>
+        <div class="flex justify-content-evenly align-items-center">
+          <p-button routerLink="/auth/register/student" label="Estudiante" icon="pi pi-user"></p-button>
+          <p-button routerLink="/auth/register/company" label="Empresa" icon="pi pi-briefcase"></p-button>
+        </div>
       </div>
     </div>
     <form class="flex flex-column gap-4" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -49,7 +51,7 @@
               mediumLabel="Medium"
               strongLabel="Fuerte"
             >
-              <ng-template pTemplate="footer" class="opacity-10">
+              <ng-template pTemplate="footer">
                 <p-divider></p-divider>
                 <ul class="pl-2 ml-2 my-0 leading-normal">
                   <li [class.text-green-600]="!loginForm.controls.password.errors?.['lowercase']"
@@ -85,7 +87,13 @@
       </div>
       <div class="flex align-items-center justify-content-between mb-6">
         <div class="flex align-items-center">
-          <p-checkbox id="rememberme" [binary]="true" styleClass="mr-2"></p-checkbox>
+          <p-checkbox
+            id="rememberme"
+            [binary]="true"
+            formControlName="rememberMe"
+            inputId="rememberme"
+            class="mr-2"
+          />
           <label for="rememberme" class="text-900">Recuerdame</label>
         </div>
       </div>

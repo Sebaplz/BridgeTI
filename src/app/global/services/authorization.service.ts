@@ -12,6 +12,7 @@ export class AuthorizationService {
   private readonly store = inject(Store<{ auth: AuthStore }>);
   private readonly router = inject(Router);
   private readonly TOKEN_KEY = 'authorization';
+  private readonly SESSION_TOKEN_KEY = 'session_token';
 
   constructor() {
     console.log('AuthorizationService');
@@ -26,6 +27,10 @@ export class AuthorizationService {
 
   saveToken(token: string) {
     localStorage.setItem(this.TOKEN_KEY, token);
+  }
+
+  saveSessionToken(token: string) {
+    sessionStorage.setItem(this.SESSION_TOKEN_KEY, token);
   }
 
   get getTokenStorage() {

@@ -36,4 +36,10 @@ export interface AuthStore {
    * Error que puede ocurrir durante la autenticación
    */
   error: string | null;
+
+  /**
+   * rememberMe
+   * Indica si el usuario quiere que se mantenga autenticado
+   */
+  rememberMe: boolean;
 }
