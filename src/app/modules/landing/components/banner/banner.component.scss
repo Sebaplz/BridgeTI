@@ -1,0 +1,13 @@
+.img-banner{
+  width: 30rem;
+  height: auto;
+}
+
+section {
+  height: auto;
+}
+@media(min-width: 1024px) {
+  section {
+    height: 43rem;
+  }
+}
