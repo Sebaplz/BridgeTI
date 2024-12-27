@@ -1,1 +1,174 @@
-<p>register-company-page works!</p>
+<div class="fullscreen w-full flex justify-content-center align-items-center">
+  <div class="login-layout surface-card p-4 shadow-2 border-round w-full lg:w-6">
+    <div class="text-center mb-5">
+      <img src="/logo.png" alt="Logo" class="login-image">
+      <div class="text-900 text-3xl font-medium mb-3">Registro de Empresas</div>
+      <span class="text-600 font-medium line-height-3">¿Ya tienes una cuenta?</span>
+      <a routerLink="/auth/login" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Inicia sesión aquí</a>
+    </div>
+    <form class="flex flex-column gap-4" [formGroup]="registerCompanyForm" (ngSubmit)="onSubmit()">
+      <div class="flex flex-column justify-content-center align-items-center gap-5 pb-4">
+        <div class="w-full flex flex-column">
+          <p-floatLabel>
+            <input
+              id="companyName"
+              type="text"
+              pInputText
+              class="w-full"
+              formControlName="companyName"
+              [class.ng-invalid]="registerCompanyForm.controls.companyName.errors"
+              [class.ng-dirty]="registerCompanyForm.controls.companyName.dirty"
+            >
+            <label for="companyName" class="block text-900 font-medium">Nombre de la Empresa</label>
+          </p-floatLabel>
+          @if (registerCompanyForm.controls.companyName.errors?.['required'] && registerCompanyForm.controls.companyName.dirty) {
+            <small class="text-red-700 ml-3 mt-1">Nombre de la Empresa es requerido</small>
+          } @else if (registerCompanyForm.controls.companyName.errors?.['minlength'] && registerCompanyForm.controls.companyName.dirty) {
+            <small class="text-red-700 ml-3 mt-1">Nombre de la Empresa debe tener al menos 3 caracteres</small>
+          } @else if (registerCompanyForm.controls.companyName.errors?.['maxlength'] && registerCompanyForm.controls.companyName.dirty) {
+            <small class="text-red-700 ml-3 mt-1">Nombre de la Empresa debe tener menos de 20 caracteres</small>
+          }
+        </div>
+        <div class="flex gap-2">
+          <div class="w-full flex flex-column">
+            <p-floatLabel>
+              <input
+                id="contactName"
+                type="text"
+                pInputText
+                class="w-full"
+                formControlName="contactName"
+                [class.ng-invalid]="registerCompanyForm.controls.contactName.errors"
+                [class.ng-dirty]="registerCompanyForm.controls.contactName.dirty"
+              >
+              <label for="contactName" class="block text-900 font-medium">Nombre del contacto</label>
+            </p-floatLabel>
+            @if (registerCompanyForm.controls.contactName.errors?.['required'] && registerCompanyForm.controls.contactName.dirty) {
+              <small class="text-red-700 ml-3 mt-1">El Nombre del contacto es requerido</small>
+            } @else if (registerCompanyForm.controls.contactName.errors?.['minlength'] && registerCompanyForm.controls.contactName.dirty) {
+              <small class="text-red-700 ml-3 mt-1">El Nombre del contacto debe tener al menos 3 caracteres</small>
+            } @else if (registerCompanyForm.controls.contactName.errors?.['maxlength'] && registerCompanyForm.controls.contactName.dirty) {
+              <small class="text-red-700 ml-3 mt-1">El Nombre del contacto debe tener menos de 20 caracteres</small>
+            }
+          </div>
+          <div class="w-full flex flex-column">
+            <p-floatLabel>
+              <input
+                id="contactPhone"
+                type="text"
+                pInputText
+                class="w-full"
+                formControlName="contactPhone"
+                [class.ng-invalid]="registerCompanyForm.controls.contactPhone.errors"
+                [class.ng-dirty]="registerCompanyForm.controls.contactPhone.dirty"
+              >
+              <label for="contactPhone" class="block text-900 font-medium">Contacto (+5691234567)</label>
+            </p-floatLabel>
+            @if (registerCompanyForm.controls.contactPhone.errors?.['required'] && registerCompanyForm.controls.contactPhone.dirty) {
+              <small class="text-red-700 ml-3 mt-1">El Contacto es requerido</small>
+            } @else if (registerCompanyForm.controls.contactPhone.errors?.['minlength'] && registerCompanyForm.controls.contactPhone.dirty) {
+              <small class="text-red-700 ml-3 mt-1">El Contacto debe tener al menos 3 caracteres</small>
+            } @else if (registerCompanyForm.controls.contactPhone.errors?.['maxlength'] && registerCompanyForm.controls.contactPhone.dirty) {
+              <small class="text-red-700 ml-3 mt-1">El Contacto debe tener menos de 20 caracteres</small>
+            }
+          </div>
+        </div>
+        <div class="w-full flex flex-column">
+          <p-floatLabel>
+            <input
+              id="email"
+              type="text"
+              pInputText
+              class="w-full"
+              formControlName="email"
+              [class.ng-invalid]="registerCompanyForm.controls.email.errors"
+              [class.ng-dirty]="registerCompanyForm.controls.email.dirty"
+            >
+            <label for="email" class="block text-900 font-medium">Correo Electrónico</label>
+          </p-floatLabel>
+          @if (registerCompanyForm.controls.email.errors?.['required'] && registerCompanyForm.controls.email.dirty) {
+            <small class="text-red-700 ml-3 mt-1">Correo Electrónico es requerido</small>
+          } @else if (registerCompanyForm.controls.email.errors?.['email'] && registerCompanyForm.controls.email.dirty) {
+            <small class="text-red-700 ml-3 mt-1">Correo Electrónico no es valido!</small>
+          }
+        </div>
+        <div class="w-full flex flex-column">
+          <span class="p-float-label w-full">
+            <p-password
+              id="password"
+              formControlName="password"
+              [toggleMask]="true"
+              [feedback]="true"
+              styleClass="w-full"
+              [style]="{'width':'100%'}"
+              inputStyleClass="w-full"
+              [class.ng-invalid]="registerCompanyForm.controls.password.errors"
+              [class.ng-dirty]="registerCompanyForm.controls.password.dirty"
+              promptLabel="Elige una contraseña"
+              weakLabel="Simple"
+              mediumLabel="Medium"
+              strongLabel="Fuerte"
+            >
+              <ng-template pTemplate="footer">
+                <p-divider></p-divider>
+                <ul class="pl-2 ml-2 my-0 leading-normal">
+                  <li [class.text-green-600]="!registerCompanyForm.controls.password.errors?.['lowercase']"
+                      [class.text-red-700]="registerCompanyForm.controls.password.errors?.['lowercase']">
+                    Al menos una letra minúscula
+                  </li>
+                  <li [class.text-green-600]="!registerCompanyForm.controls.password.errors?.['uppercase']"
+                      [class.text-red-700]="registerCompanyForm.controls.password.errors?.['uppercase']">
+                    Al menos una letra mayúscula
+                  </li>
+                  <li [class.text-green-600]="!registerCompanyForm.controls.password.errors?.['number']"
+                      [class.text-red-700]="registerCompanyForm.controls.password.errors?.['number']">
+                    Al menos un número
+                  </li>
+                  <li [class.text-green-600]="!registerCompanyForm.controls.password.errors?.['specialCharacter']"
+                      [class.text-red-700]="registerCompanyForm.controls.password.errors?.['specialCharacter']">
+                    Al menos un carácter especial
+                  </li>
+                  <li [class.text-green-600]="!registerCompanyForm.controls.password.errors?.['length']"
+                      [class.text-red-700]="registerCompanyForm.controls.password.errors?.['length']">
+                    Entre 8 y 20 caracteres
+                  </li>
+                </ul>
+              </ng-template>
+            </p-password>
+            <label for="password" class="block text-900 font-medium">Contraseña</label>
+          </span>
+          <!-- Mostrar mensaje genérico si es inválido -->
+          @if (registerCompanyForm.controls.password.errors && registerCompanyForm.controls.password.dirty) {
+            <small class="text-red-700 ml-3 mt-1">Por favor revisa las reglas de la contraseña.</small>
+          }
+        </div>
+        <div class="w-full flex flex-column">
+          <span class="p-float-label w-full">
+            <p-password
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              [toggleMask]="true"
+              [feedback]="false"
+              styleClass="w-full"
+              [style]="{'width':'100%'}"
+              inputStyleClass="w-full"
+              [class.ng-invalid]="registerCompanyForm.controls.confirmPassword.errors"
+              [class.ng-dirty]="registerCompanyForm.controls.confirmPassword.dirty"
+            >
+              </p-password>
+            <label for="confirmPassword" class="block text-900 font-medium">Confirmar Contraseña</label>
+          </span>
+          @if (registerCompanyForm.controls.confirmPassword.errors?.['required'] && registerCompanyForm.controls.confirmPassword.dirty) {
+            <small class="text-red-700 ml-3 mt-1">Confirmar Contraseña es requerido</small>
+          }
+          <small class="text-red-700 ml-3 mt-1" *ngIf="registerCompanyForm.hasError('passwordsMismatch')">
+            Las contraseñas no coinciden!
+          </small>
+        </div>
+      </div>
+      <button pButton pRipple label="Crear Cuenta" icon="pi pi-user" class="w-full"
+              [disabled]="registerCompanyForm.invalid"></button>
+      <span class="text-red-700 ml-3 mt-1" *ngIf="errorMessage">{{ errorMessage }}</span>
+    </form>
+  </div>
+</div>
