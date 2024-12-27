@@ -8,7 +8,13 @@ export const authReaction = createActionGroup({
     'Login Fail': props<{ error: any }>(),
 
     'Register': props<{ name: string, rut: string, firstLastName: string, secondLastName: string, email: string, password: string }>(),
+    /*TODO: Nunca llega acá porque llamo a la acción de login*/
     'Register Success': emptyProps(),
     'Register Fail': props<{ error: any }>(),
+
+    'Register Company': props<{ companyName: string, contactName: string, contactPhone: string, email: string, password: string }>(),
+    /*TODO: Nunca llega acá porque llamo a la acción de login*/
+    'Register Company Success': emptyProps(),
+    'Register Company Fail': props<{ error: any }>(),
   },
 });

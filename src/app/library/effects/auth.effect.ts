@@ -123,6 +123,37 @@ export class AuthEffect {
     { functional: true }
   );
 
+  registerCompany$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(authReaction.registerCompany),
+        mergeMap((action) =>
+          this.authRepository.registerCompany({
+            companyName: action.companyName,
+            contactName: action.contactName,
+            contactPhone: action.contactPhone,
+            email: action.email,
+            password: action.password,
+          }).pipe(
+            map(() => {
+              return authReaction.login({
+                email: action.email,
+                password: action.password,
+                rememberMe: false
+              });
+            }),
+            catchError(err => {
+              if(err.status === 409) {
+                const errorMessage = "User with this email already exists";
+                return of(authReaction.registerFail({ error: errorMessage }));
+              }
+              return of(authReaction.registerFail({ error: 'An unexpected error occurred' }));
+            })
+          )
+        )
+      ),
+    { functional: true }
+  );
+
   clearError$ = createEffect(()=>
     this.actions$.pipe(
       ofType(authAction.clearError),

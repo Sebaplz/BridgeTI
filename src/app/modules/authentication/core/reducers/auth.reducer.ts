@@ -54,6 +54,18 @@ export const authReducer = createReducer(
     (state, { error }): AuthStore =>
       ({ ...state, loading: false, check: true, error })),
 
+  on(authReaction.registerCompany,
+    (): AuthStore =>
+      (authInitialState)),
+
+  on(authReaction.registerCompanySuccess,
+    (state): AuthStore =>
+      ({ ...state, loading: false, check: true })),
+
+  on(authReaction.registerCompanyFail,
+    (state, { error }): AuthStore =>
+      ({ ...state, loading: false, check: true, error })),
+
   on(authAction.clearError, (state) => ({
     ...state,
     error: null,
