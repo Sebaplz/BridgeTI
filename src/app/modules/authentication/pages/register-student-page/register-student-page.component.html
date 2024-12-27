@@ -1,76 +1,100 @@
 <div class="fullscreen w-full flex justify-content-center align-items-center">
   <div class="login-layout surface-card p-4 shadow-2 border-round w-full lg:w-6">
     <div class="text-center mb-5">
-      <img src="https://victecode.com/wp-content/uploads/2024/03/tienda-virtual-servicio.png" alt="Logo"
-           class="login-image">
+      <img src="/logo.png" alt="Logo" class="login-image">
       <div class="text-900 text-3xl font-medium mb-3">Registro de Estudiantes</div>
       <span class="text-600 font-medium line-height-3">¿Ya tienes una cuenta?</span>
-      <a routerLink="/auth/login" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Iniciar sesión</a>
+      <a routerLink="/auth/login" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Inicia sesión aquí</a>
     </div>
-    <form class="flex flex-column gap-4 pt-4" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form class="flex flex-column gap-4" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="flex flex-column justify-content-center align-items-center gap-5 pb-4">
-        <div class="w-full flex flex-column">
-          <p-floatLabel>
-            <input
-              id="name"
-              type="text"
-              pInputText
-              class="w-full"
-              formControlName="name"
-              [class.ng-invalid]="registerForm.controls.name.errors"
-              [class.ng-dirty]="registerForm.controls.name.dirty"
-            >
-            <label for="name" class="block text-900 font-medium">Nombre</label>
-          </p-floatLabel>
-          @if (registerForm.controls.name.errors?.['required'] && registerForm.controls.name.dirty) {
-            <small class="text-red-700 ml-3 mt-1">Nombre es requerido</small>
-          } @else if (registerForm.controls.name.errors?.['minlength'] && registerForm.controls.name.dirty) {
-            <small class="text-red-700 ml-3 mt-1">Nombre debe tener al menos 3 caracteres</small>
-          } @else if (registerForm.controls.name.errors?.['maxlength'] && registerForm.controls.name.dirty) {
-            <small class="text-red-700 ml-3 mt-1">Nombre debe tener menos de 20 caracteres</small>
-          }
+        <div class="flex gap-2">
+          <div class="w-full flex flex-column">
+            <p-floatLabel>
+              <input
+                id="name"
+                type="text"
+                pInputText
+                class="w-full"
+                formControlName="name"
+                [class.ng-invalid]="registerForm.controls.name.errors"
+                [class.ng-dirty]="registerForm.controls.name.dirty"
+              >
+              <label for="name" class="block text-900 font-medium">Nombre</label>
+            </p-floatLabel>
+            @if (registerForm.controls.name.errors?.['required'] && registerForm.controls.name.dirty) {
+              <small class="text-red-700 ml-3 mt-1">Nombre es requerido</small>
+            } @else if (registerForm.controls.name.errors?.['minlength'] && registerForm.controls.name.dirty) {
+              <small class="text-red-700 ml-3 mt-1">Nombre debe tener al menos 3 caracteres</small>
+            } @else if (registerForm.controls.name.errors?.['maxlength'] && registerForm.controls.name.dirty) {
+              <small class="text-red-700 ml-3 mt-1">Nombre debe tener menos de 20 caracteres</small>
+            }
+          </div>
+          <div class="w-full flex flex-column">
+            <p-floatLabel>
+              <input
+                id="rut"
+                type="text"
+                pInputText
+                class="w-full"
+                formControlName="rut"
+                [class.ng-invalid]="registerForm.controls.rut.errors"
+                [class.ng-dirty]="registerForm.controls.rut.dirty"
+              >
+              <label for="rut" class="block text-900 font-medium">Rut (12345678-9)</label>
+            </p-floatLabel>
+            @if (registerForm.controls.rut.errors?.['required'] && registerForm.controls.rut.dirty) {
+              <small class="text-red-700 ml-3 mt-1">Rut es requerido</small>
+            } @else if (registerForm.controls.rut.errors?.['invalidFormat'] && registerForm.controls.rut.dirty) {
+              <small class="text-red-700 ml-3 mt-1">Formato de Rut inválido</small>
+            } @else if (registerForm.controls.rut.errors?.['invalidDv'] && registerForm.controls.rut.dirty) {
+              <small class="text-red-700 ml-3 mt-1">Dígito verificador incorrecto</small>
+            }
+          </div>
         </div>
-        <div class="w-full flex flex-column">
-          <p-floatLabel>
-            <input
-              id="firstLastName"
-              type="text"
-              pInputText
-              class="w-full"
-              formControlName="firstLastName"
-              [class.ng-invalid]="registerForm.controls.firstLastName.errors"
-              [class.ng-dirty]="registerForm.controls.firstLastName.dirty"
-            >
-            <label for="firstLastName" class="block text-900 font-medium">Apellido Paterno</label>
-          </p-floatLabel>
-          @if (registerForm.controls.firstLastName.errors?.['required'] && registerForm.controls.firstLastName.dirty) {
-            <small class="text-red-700 ml-3 mt-1">El Apellido es requerido</small>
-          } @else if (registerForm.controls.firstLastName.errors?.['minlength'] && registerForm.controls.firstLastName.dirty) {
-            <small class="text-red-700 ml-3 mt-1">El Apellido debe tener al menos 3 caracteres</small>
-          } @else if (registerForm.controls.firstLastName.errors?.['maxlength'] && registerForm.controls.firstLastName.dirty) {
-            <small class="text-red-700 ml-3 mt-1">El Apellido debe tener menos de 20 caracteres</small>
-          }
-        </div>
-        <div class="w-full flex flex-column">
-          <p-floatLabel>
-            <input
-              id="secondLastName"
-              type="text"
-              pInputText
-              class="w-full"
-              formControlName="secondLastName"
-              [class.ng-invalid]="registerForm.controls.secondLastName.errors"
-              [class.ng-dirty]="registerForm.controls.secondLastName.dirty"
-            >
-            <label for="secondLastName" class="block text-900 font-medium">Apellido Materno</label>
-          </p-floatLabel>
-          @if (registerForm.controls.secondLastName.errors?.['required'] && registerForm.controls.secondLastName.dirty) {
-            <small class="text-red-700 ml-3 mt-1">El Apellido Materno es requerido</small>
-          } @else if (registerForm.controls.secondLastName.errors?.['minlength'] && registerForm.controls.secondLastName.dirty) {
-            <small class="text-red-700 ml-3 mt-1">El Apellido Materno debe tener al menos 3 caracteres</small>
-          } @else if (registerForm.controls.secondLastName.errors?.['maxlength'] && registerForm.controls.secondLastName.dirty) {
-            <small class="text-red-700 ml-3 mt-1">El Apellido Materno debe tener menos de 20 caracteres</small>
-          }
+        <div class="flex gap-2">
+          <div class="w-full flex flex-column">
+            <p-floatLabel>
+              <input
+                id="firstLastName"
+                type="text"
+                pInputText
+                class="w-full"
+                formControlName="firstLastName"
+                [class.ng-invalid]="registerForm.controls.firstLastName.errors"
+                [class.ng-dirty]="registerForm.controls.firstLastName.dirty"
+              >
+              <label for="firstLastName" class="block text-900 font-medium">Apellido Paterno</label>
+            </p-floatLabel>
+            @if (registerForm.controls.firstLastName.errors?.['required'] && registerForm.controls.firstLastName.dirty) {
+              <small class="text-red-700 ml-3 mt-1">El Apellido es requerido</small>
+            } @else if (registerForm.controls.firstLastName.errors?.['minlength'] && registerForm.controls.firstLastName.dirty) {
+              <small class="text-red-700 ml-3 mt-1">El Apellido debe tener al menos 3 caracteres</small>
+            } @else if (registerForm.controls.firstLastName.errors?.['maxlength'] && registerForm.controls.firstLastName.dirty) {
+              <small class="text-red-700 ml-3 mt-1">El Apellido debe tener menos de 20 caracteres</small>
+            }
+          </div>
+          <div class="w-full flex flex-column">
+            <p-floatLabel>
+              <input
+                id="secondLastName"
+                type="text"
+                pInputText
+                class="w-full"
+                formControlName="secondLastName"
+                [class.ng-invalid]="registerForm.controls.secondLastName.errors"
+                [class.ng-dirty]="registerForm.controls.secondLastName.dirty"
+              >
+              <label for="secondLastName" class="block text-900 font-medium">Apellido Materno</label>
+            </p-floatLabel>
+            @if (registerForm.controls.secondLastName.errors?.['required'] && registerForm.controls.secondLastName.dirty) {
+              <small class="text-red-700 ml-3 mt-1">El Apellido Materno es requerido</small>
+            } @else if (registerForm.controls.secondLastName.errors?.['minlength'] && registerForm.controls.secondLastName.dirty) {
+              <small class="text-red-700 ml-3 mt-1">El Apellido Materno debe tener al menos 3 caracteres</small>
+            } @else if (registerForm.controls.secondLastName.errors?.['maxlength'] && registerForm.controls.secondLastName.dirty) {
+              <small class="text-red-700 ml-3 mt-1">El Apellido Materno debe tener menos de 20 caracteres</small>
+            }
+          </div>
         </div>
         <div class="w-full flex flex-column">
           <p-floatLabel>
@@ -83,57 +107,89 @@
               [class.ng-invalid]="registerForm.controls.email.errors"
               [class.ng-dirty]="registerForm.controls.email.dirty"
             >
-            <label for="email" class="block text-900 font-medium">Email</label>
+            <label for="email" class="block text-900 font-medium">Correo Electrónico</label>
           </p-floatLabel>
           @if (registerForm.controls.email.errors?.['required'] && registerForm.controls.email.dirty) {
-            <small class="text-red-700 ml-3 mt-1">Email es requerido</small>
+            <small class="text-red-700 ml-3 mt-1">Correo Electrónico es requerido</small>
           } @else if (registerForm.controls.email.errors?.['email'] && registerForm.controls.email.dirty) {
-            <small class="text-red-700 ml-3 mt-1">Email no es valido!</small>
+            <small class="text-red-700 ml-3 mt-1">Correo Electrónico no es valido!</small>
           }
         </div>
         <div class="w-full flex flex-column">
-          <p-floatLabel>
-            <input
+          <span class="p-float-label w-full">
+            <p-password
               id="password"
-              type="password"
-              pInputText
-              class="w-full"
               formControlName="password"
+              [toggleMask]="true"
+              [feedback]="true"
+              styleClass="w-full"
+              [style]="{'width':'100%'}"
+              inputStyleClass="w-full"
               [class.ng-invalid]="registerForm.controls.password.errors"
               [class.ng-dirty]="registerForm.controls.password.dirty"
+              promptLabel="Elige una contraseña"
+              weakLabel="Simple"
+              mediumLabel="Medium"
+              strongLabel="Fuerte"
             >
-            <label for="password" class="block text-900 font-medium">Password</label>
-          </p-floatLabel>
-          @if (registerForm.controls.password.errors?.['required'] && registerForm.controls.password.dirty) {
-            <small class="text-red-700 ml-3 mt-1">Password es requerido</small>
-          } @else if (registerForm.controls.password.errors?.['minlength'] && registerForm.controls.password.dirty) {
-            <small class="text-red-700 ml-3 mt-1">Password debe tener al menos 8 caracteres</small>
-          } @else if (registerForm.controls.password.errors?.['maxlength'] && registerForm.controls.password.dirty) {
-            <small class="text-red-700 ml-3 mt-1">Password debe tener menos de 20 caracteres</small>
+              <ng-template pTemplate="footer">
+                <p-divider></p-divider>
+                <ul class="pl-2 ml-2 my-0 leading-normal">
+                  <li [class.text-green-600]="!registerForm.controls.password.errors?.['lowercase']"
+                      [class.text-red-700]="registerForm.controls.password.errors?.['lowercase']">
+                    Al menos una letra minúscula
+                  </li>
+                  <li [class.text-green-600]="!registerForm.controls.password.errors?.['uppercase']"
+                      [class.text-red-700]="registerForm.controls.password.errors?.['uppercase']">
+                    Al menos una letra mayúscula
+                  </li>
+                  <li [class.text-green-600]="!registerForm.controls.password.errors?.['number']"
+                      [class.text-red-700]="registerForm.controls.password.errors?.['number']">
+                    Al menos un número
+                  </li>
+                  <li [class.text-green-600]="!registerForm.controls.password.errors?.['specialCharacter']"
+                      [class.text-red-700]="registerForm.controls.password.errors?.['specialCharacter']">
+                    Al menos un carácter especial
+                  </li>
+                  <li [class.text-green-600]="!registerForm.controls.password.errors?.['length']"
+                      [class.text-red-700]="registerForm.controls.password.errors?.['length']">
+                    Entre 8 y 20 caracteres
+                  </li>
+                </ul>
+              </ng-template>
+            </p-password>
+            <label for="password" class="block text-900 font-medium">Contraseña</label>
+          </span>
+          <!-- Mostrar mensaje genérico si es inválido -->
+          @if (registerForm.controls.password.errors && registerForm.controls.password.dirty) {
+            <small class="text-red-700 ml-3 mt-1">Por favor revisa las reglas de la contraseña.</small>
           }
         </div>
         <div class="w-full flex flex-column">
-          <p-floatLabel>
-            <input
+          <span class="p-float-label w-full">
+            <p-password
               id="confirmPassword"
-              type="password"
-              pInputText
-              class="w-full"
               formControlName="confirmPassword"
+              [toggleMask]="true"
+              [feedback]="false"
+              styleClass="w-full"
+              [style]="{'width':'100%'}"
+              inputStyleClass="w-full"
               [class.ng-invalid]="registerForm.controls.confirmPassword.errors"
               [class.ng-dirty]="registerForm.controls.confirmPassword.dirty"
             >
-            <label for="confirmPassword" class="block text-900 font-medium">Confirmar Password</label>
-          </p-floatLabel>
+              </p-password>
+            <label for="confirmPassword" class="block text-900 font-medium">Confirmar Contraseña</label>
+          </span>
           @if (registerForm.controls.confirmPassword.errors?.['required'] && registerForm.controls.confirmPassword.dirty) {
-            <small class="text-red-700 ml-3 mt-1">Confirmar Password es requerido</small>
+            <small class="text-red-700 ml-3 mt-1">Confirmar Contraseña es requerido</small>
           }
           <small class="text-red-700 ml-3 mt-1" *ngIf="registerForm.hasError('passwordsMismatch')">
-            Passwords no coinciden!
+            Las contraseñas no coinciden!
           </small>
         </div>
       </div>
-      <button pButton pRipple label="Sign Up" icon="pi pi-user" class="w-full"
+      <button pButton pRipple label="Crear Cuenta" icon="pi pi-user" class="w-full"
               [disabled]="registerForm.invalid"></button>
       <span class="text-red-700 ml-3 mt-1" *ngIf="errorMessage">{{ errorMessage }}</span>
     </form>

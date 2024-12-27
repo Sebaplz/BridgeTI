@@ -2,10 +2,16 @@
   <div class="login-layout surface-card p-4 shadow-2 border-round w-full lg:w-6">
     <div class="text-center mb-5">
       <img src="/logo.png" alt="Logo" class="login-image">
-      <div class="text-900 text-3xl font-medium mb-3">BridgeTI</div>
-      <span class="text-600 font-medium line-height-3">¿No tienes cuenta de estudiante?</span>
-      <a routerLink="/auth/register/student" class="block font-medium no-underline ml-2 text-blue-500 cursor-pointer">Crea
-        una cuenta ahora!</a>
+      <div class="mb-3">
+        <h1 class="text-900 text-3xl font-medium mt-0">BridgeTI</h1>
+      </div>
+      <div class="flex gap-2 flex-column">
+        <span class="text-600 font-medium line-height-3">¿No tienes cuenta? Crea una cuenta ahora!</span>
+        <div class="flex justify-content-evenly align-items-center">
+          <p-button routerLink="/auth/register/student" label="Estudiante" icon="pi pi-user"></p-button>
+          <p-button routerLink="/auth/register/company" label="Empresa" icon="pi pi-briefcase"></p-button>
+        </div>
+      </div>
     </div>
     <form class="flex flex-column gap-4" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="flex flex-column justify-content-center align-items-center gap-5">
@@ -20,12 +26,12 @@
               [class.ng-invalid]="loginForm.controls.email.errors"
               [class.ng-dirty]="loginForm.controls.email.dirty"
             >
-            <label for="email" class="block text-900 font-medium">Email</label>
+            <label for="email" class="block text-900 font-medium">Correo Electrónico</label>
           </p-floatLabel>
           @if (loginForm.controls.email.errors?.['required'] && loginForm.controls.email.dirty) {
-            <small class="text-red-700 ml-3 mt-1">Email es requerido</small>
+            <small class="text-red-700 ml-3 mt-1">Correo Electrónico es requerido</small>
           } @else if (loginForm.controls.email.errors?.['email'] && loginForm.controls.email.dirty) {
-            <small class="text-red-700 ml-3 mt-1">Email no es valido!</small>
+            <small class="text-red-700 ml-3 mt-1">Correo Electrónico no es valido!</small>
           }
         </div>
         <div class="w-full flex flex-column">
@@ -40,7 +46,7 @@
               inputStyleClass="w-full"
               [class.ng-invalid]="loginForm.controls.password.errors"
               [class.ng-dirty]="loginForm.controls.password.dirty"
-              promptLabel="Elige una password"
+              promptLabel="Elige una contraseña"
               weakLabel="Simple"
               mediumLabel="Medium"
               strongLabel="Fuerte"
@@ -71,7 +77,7 @@
                 </ul>
               </ng-template>
             </p-password>
-            <label for="password" class="block text-900 font-medium">Password</label>
+            <label for="password" class="block text-900 font-medium">Contraseña</label>
           </span>
           <!-- Mostrar mensaje genérico si es inválido -->
           @if (loginForm.controls.password.errors && loginForm.controls.password.dirty) {
@@ -81,7 +87,13 @@
       </div>
       <div class="flex align-items-center justify-content-between mb-6">
         <div class="flex align-items-center">
-          <p-checkbox id="rememberme" [binary]="true" styleClass="mr-2"></p-checkbox>
+          <p-checkbox
+            id="rememberme"
+            [binary]="true"
+            formControlName="rememberMe"
+            inputId="rememberme"
+            class="mr-2"
+          />
           <label for="rememberme" class="text-900">Recuerdame</label>
         </div>
       </div>

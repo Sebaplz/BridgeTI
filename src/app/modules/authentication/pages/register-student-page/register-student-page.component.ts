@@ -9,10 +9,14 @@ import {RouterLink} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {NgIf} from '@angular/common';
 import {authAction} from '../../../../global/actions/auth.action';
-import {passwordsMatchValidator} from '../../core/utils/passwordsMatchValidator';
+import {passwordsMatchValidator} from '../../core/utils/passwords-match-validator';
 import {AuthStore} from '../../../../resources/stores/auth.store';
 import {authReaction} from '../../../../library/reactions/auth.reaction';
 import {RegisterStudentIn} from '../../../../resources/io/auth/register-student.in';
+import {PasswordModule} from 'primeng/password';
+import {DividerModule} from 'primeng/divider';
+import {passwordValidator} from '../../core/utils/password-validator';
+import {rutValidator} from '../../core/utils/rut-validator';
 
 @Component({
   selector: 'register-student-page',
@@ -25,7 +29,9 @@ import {RegisterStudentIn} from '../../../../resources/io/auth/register-student.
     ReactiveFormsModule,
     Ripple,
     RouterLink,
-    NgIf
+    NgIf,
+    PasswordModule,
+    DividerModule
   ],
   templateUrl: './register-student-page.component.html',
   styleUrl: './register-student-page.component.scss'
@@ -37,10 +43,11 @@ export class RegisterStudentPageComponent implements OnInit, OnDestroy {
 
   registerForm = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    rut: ['', [Validators.required, rutValidator()]],
     firstLastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     secondLastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
+    password: ['', [Validators.required, passwordValidator(), Validators.maxLength(20)]],
     confirmPassword: ['', [Validators.required]]
   }, {validators: passwordsMatchValidator()});
 
@@ -57,7 +64,7 @@ export class RegisterStudentPageComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    const {name, firstLastName, secondLastName, email, password} = this.registerForm.value as RegisterStudentIn;
-    this.authStore.dispatch(authReaction.register({name, firstLastName, secondLastName, email, password}));
+    const {name, rut, firstLastName, secondLastName, email, password} = this.registerForm.value as RegisterStudentIn;
+    this.authStore.dispatch(authReaction.register({name, rut, firstLastName, secondLastName, email, password}));
   }
 }

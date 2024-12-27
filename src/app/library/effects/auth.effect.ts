@@ -44,10 +44,15 @@ export class AuthEffect {
             password: action.password
           }).pipe(
             map(response => {
-              this.authorizationService.saveToken(response.token);
+              if(action.rememberMe) {
+                this.authorizationService.saveToken(response.token);
+              }else{
+                this.authorizationService.saveSessionToken(response.token);
+              }
               return authReaction.loginSuccess({
                 email: action.email,
                 token: response.token,
+                rememberMe: action.rememberMe
               });
             }),
             catchError(err => {
@@ -94,13 +99,15 @@ export class AuthEffect {
             email: action.email,
             password: action.password,
             name: action.name,
+            rut: action.rut,
             firstLastName: action.firstLastName,
             secondLastName: action.secondLastName,
           }).pipe(
             map(() => {
               return authReaction.login({
                 email: action.email,
-                password: action.password
+                password: action.password,
+                rememberMe: false
               });
             }),
             catchError(err => {
