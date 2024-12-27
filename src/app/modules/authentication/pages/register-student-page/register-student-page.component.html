@@ -41,7 +41,7 @@
                 [class.ng-invalid]="registerForm.controls.rut.errors"
                 [class.ng-dirty]="registerForm.controls.rut.dirty"
               >
-              <label for="rut" class="block text-900 font-medium">Rut (12345678-9)</label>
+              <label for="rut" class="block text-900 font-medium">Rut (12.345.678-9)</label>
             </p-floatLabel>
             @if (registerForm.controls.rut.errors?.['required'] && registerForm.controls.rut.dirty) {
               <small class="text-red-700 ml-3 mt-1">Rut es requerido</small>
