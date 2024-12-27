@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 * {
   font-size: clamp(12px, 2.5vw, 14px);
 }
@@ -12,6 +12,7 @@ app-root
   min-width: 324px;
   display: block;
   background: linear-gradient(180deg, rgb(31, 41, 55), rgb(51, 65, 85), rgb(15, 23, 42));
+  font-family: 'Inter', sans-serif;
 }
 
 *[id$="page"] > div {
