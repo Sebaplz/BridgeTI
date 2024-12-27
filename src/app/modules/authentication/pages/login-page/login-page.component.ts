@@ -13,7 +13,7 @@ import {RouterLink} from '@angular/router';
 import {AuthStore} from '../../../../resources/stores/auth.store';
 import {authReaction} from '../../../../library/reactions/auth.reaction';
 import {PasswordModule} from 'primeng/password';
-import {passwordValidator} from '../../core/utils/passwordValidator';
+import {passwordValidator} from '../../core/utils/password-validator';
 
 @Component({
   selector: 'login-page',

@@ -7,7 +7,7 @@ export const authReaction = createActionGroup({
     'Login Success': props<{ email: string, token: string, rememberMe: boolean }>(),
     'Login Fail': props<{ error: any }>(),
 
-    'Register': props<{ name: string, firstLastName: string, secondLastName: string, email: string, password: string }>(),
+    'Register': props<{ name: string, rut: string, firstLastName: string, secondLastName: string, email: string, password: string }>(),
     'Register Success': emptyProps(),
     'Register Fail': props<{ error: any }>(),
   },

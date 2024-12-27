@@ -99,6 +99,7 @@ export class AuthEffect {
             email: action.email,
             password: action.password,
             name: action.name,
+            rut: action.rut,
             firstLastName: action.firstLastName,
             secondLastName: action.secondLastName,
           }).pipe(
