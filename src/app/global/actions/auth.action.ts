@@ -6,7 +6,7 @@ export const authAction = createActionGroup({
     'Logout': emptyProps(),
 
     'Load Token': emptyProps(),
-    'Load Token Success': props<{ token: string }>(),
+    'Load Token Success': props<{ token: string, role: string, email: string }>(),
     'Load Token Failure': props<{ error: any }>(),
 
     'Clear error': emptyProps(),

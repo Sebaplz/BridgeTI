@@ -5,6 +5,7 @@ import {authAction} from '../../../../global/actions/auth.action';
 
 export const authInitialState: AuthStore = {
   email: null,
+  role: null,
   token: null,
   check: false,
   loading: true,
@@ -19,8 +20,8 @@ export const authReducer = createReducer(
     (): AuthStore =>
       (authInitialState)),
   on(authReaction.loginSuccess,
-    (state, { email, token, rememberMe }): AuthStore =>
-      ({ ...state, loading: false, email, token, check: true, isLoggedIn: true, rememberMe})),
+    (state, { email, token, role, rememberMe }): AuthStore =>
+      ({ ...state, loading: false, email, token, role, check: true, isLoggedIn: true, rememberMe})),
 
   on(authReaction.loginFail,
     (state, { error }): AuthStore =>
@@ -31,8 +32,8 @@ export const authReducer = createReducer(
       (authInitialState)),
 
   on(authAction.loadTokenSuccess,
-    (state, { token }): AuthStore =>
-      ({ ...state, loading: false, token, check: true, isLoggedIn: true })),
+    (state, { token, role, email }): AuthStore =>
+      ({ ...state, loading: false, token, role, email, check: true, isLoggedIn: true })),
 
   on(authAction.loadTokenFailure,
     (state): AuthStore =>
