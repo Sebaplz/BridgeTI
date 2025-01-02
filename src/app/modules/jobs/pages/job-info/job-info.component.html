@@ -1,0 +1,61 @@
+<div class="mx-auto px-4 py-8">
+  <div class="text-center mb-4">
+    <i class="pi pi-briefcase text-6xl"></i>
+    <h1 class="text-6xl font-bold mb-2">Encuentra tu próxima oportunidad</h1>
+    <p class="text-gray-400 text-xl">Explora las últimas ofertas de trabajo en tecnología</p>
+  </div>
+
+  <div class="w-full lg:w-9 mx-auto">
+    <a routerLink="/jobs" class="flex items-center text-blue-500 mb-6 w-15rem">
+      <i class="pi pi-arrow-left mr-2"></i>
+      Volver a las ofertas
+    </a>
+  </div>
+
+  <div class="bg-gray-900 p-4 border-round-2xl w-full lg:w-9 mx-auto">
+    <div class="flex justify-between items-start mb-3">
+      <h1 class="text-3xl font-bold">{{ job?.title }}</h1>
+    </div>
+
+    <div class="flex flex-column lg:flex-row gap-4 mb-4">
+      <div class="flex items-center">
+        <i class="pi pi-building mr-2"></i>
+        {{ job?.company?.name }}
+      </div>
+      <div class="flex items-center">
+        <i class="pi pi-map-marker mr-2"></i>
+        {{ job?.location }}
+      </div>
+      <div class="flex items-center">
+        <i class="pi pi-clock mr-2"></i>
+        Tiempo completo
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <h2 class="text-xl font-semibold mb-4">Descripción del puesto</h2>
+      <p class="text-gray-400">{{ job?.description }}</p>
+    </div>
+
+    <div class="mb-4">
+      <h2 class="text-xl font-semibold mb-4">Información de contacto</h2>
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center">
+          <i class="pi pi-user mr-2"></i>
+          {{ job?.company?.contactName }}
+        </div>
+        <div class="flex items-center">
+          <i class="pi pi-phone mr-2"></i>
+          +{{ job?.company?.contactPhone }}
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-content-center">
+      <button
+        pButton
+        label="Postular ahora"
+        class="w-full lg:w-5 p-button-raised">
+      </button>
+    </div>
+  </div>
+</div>
