@@ -16,6 +16,20 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./modules/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
+  },
+  {
+    path: 'jobs',
+    loadChildren: () =>
+      import('./modules/jobs/jobs.module').then(
+        (m) => m.JobsModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',
