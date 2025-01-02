@@ -4,7 +4,7 @@ export const authReaction = createActionGroup({
   source: 'Auth Reactions',
   events: {
     'Login': props<{ email: string, password: string, rememberMe: boolean }>(),
-    'Login Success': props<{ email: string, token: string, rememberMe: boolean }>(),
+    'Login Success': props<{ email: string, token: string, role: string, rememberMe: boolean }>(),
     'Login Fail': props<{ error: any }>(),
 
     'Register': props<{ name: string, rut: string, firstLastName: string, secondLastName: string, email: string, password: string }>(),

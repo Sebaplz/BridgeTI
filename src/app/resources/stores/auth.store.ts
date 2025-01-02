@@ -7,6 +7,13 @@ export interface AuthStore {
    * Email del usuario actual, para mostrarlo en la barra de navegación
    */
   email: string | null;
+
+  /**
+   * role
+   * Rol del usuario actual, para filtrar las páginas a mostrar
+   */
+  role: string | null;
+
   /**
    * token
    * Token de autenticación del usuario

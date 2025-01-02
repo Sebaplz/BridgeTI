@@ -8,6 +8,7 @@ import {authAction} from '../../global/actions/auth.action';
 import {MessageService} from 'primeng/api';
 import {authReaction} from '../reactions/auth.reaction';
 import {AuthRepository} from '../repositories/auth-repository';
+import {jwtDecode} from 'jwt-decode';
 
 @Injectable()
 export class AuthEffect {
@@ -25,7 +26,9 @@ export class AuthEffect {
         exhaustMap(() => {
             const token = this.authorizationService.getTokenStorage;
             if (token) {
-              return of(authAction.loadTokenSuccess({ token }));
+              const decodedToken = jwtDecode(token);
+              // @ts-ignore
+              return of(authAction.loadTokenSuccess({ token, role: decodedToken.role, email: decodedToken.sub }));
             }else{
               return of(authAction.loadTokenFailure({error: 'No existe sesión'}));
             }
@@ -49,9 +52,13 @@ export class AuthEffect {
               }else{
                 this.authorizationService.saveSessionToken(response.token);
               }
+              const decodedToken = jwtDecode(response.token);
+              // @ts-ignore
+              const { role } = decodedToken;
               return authReaction.loginSuccess({
                 email: action.email,
                 token: response.token,
+                role: role,
                 rememberMe: action.rememberMe
               });
             }),
