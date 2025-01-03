@@ -69,6 +69,8 @@ export class JobsPageComponent implements OnInit {
 
     if (days === -1) {
       return 'Hace menos de un día';
+    } else if (days === 0) {
+      return 'Hoy';
     } else {
       return 'Hace ' + days + ' días';
     }
